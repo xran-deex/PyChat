@@ -18,6 +18,7 @@ class PyChatGUI(QDialog, Ui_Dialog):
             else:
                 self.socket_ = socket_
 
+            #Set up the client thread
             self.client = Client(self, self.socket_)
             self.client.receive_message_signal.connect(self.receive_message)
             self.client.start()
@@ -31,13 +32,15 @@ class PyChatGUI(QDialog, Ui_Dialog):
     def showDialog(self):
         self.setVisible(True)
 
-    def send_message(self):
+    def sendMessage(self):
+        """Emit the message to be sent over the network"""
         self.textBrowser.append('me: ' + self.lineEdit.text())
         self.send_message_signal.emit(self.lineEdit.text())
         self.lineEdit.setText('')
         self.lineEdit.setFocus()
 
-    def receive_message(self, msg):
+    def receiveMessage(self, msg):
+        """Append the message to the current dialog window"""
         try:
             name = self.parent.get_connected_pc_name(self.socket_)
         except Exception as e:

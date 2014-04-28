@@ -7,7 +7,6 @@ from PyChatGUI import *
 import sys_rc
 from PyChatClient import *
 
-
 class PyChatServer(PyChatClient):
 
     sendSignal = pyqtSignal(str)
@@ -19,6 +18,7 @@ class PyChatServer(PyChatClient):
         self.gui = None
 
     def showDialog(self):
+        """Display the chat dialog"""
         action = self.sender()
         host = self.actions[action]
         ip_address = socket.gethostbyname(host + '.CCPS.WAN')
@@ -28,7 +28,8 @@ class PyChatServer(PyChatClient):
         PyChatClient.createActions(self)
         self.createMoreActions()
 
-    def get_connected_pc_name(self, socket_):
+    def getConnectedPcName(self, socket_):
+        """Override this method get the pc name based on the ip address"""
         host = socket_.getpeername()
         ip = socket.gethostbyaddr(host[0])
         address = ip[0].split('.')[0].upper()
@@ -36,6 +37,7 @@ class PyChatServer(PyChatClient):
         return name
 
     def createMoreActions(self):
+        """Add all of the PC names and ip address from PCs.txt to the system try menu"""
         self.actions = {}
         self.pc_names = {}
         for line in open('PCs.txt'):

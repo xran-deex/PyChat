@@ -52,13 +52,13 @@ class PyChatClient(QMainWindow, Ui_ChatWindow):
         self.sendSignal.connect(self.client.send_message)
         self.client.message.connect(self.receiveMessage)
 
-    def send_message(self):
+    def sendMessage(self):
         self.textBrowser.append(self.lineEdit.text())
         self.sendSignal.emit(self.lineEdit.text())
         self.lineEdit.setText('')
         self.lineEdit.setFocus()
 
-    def get_connected_pc_name(self, socket_):
+    def getConnectedPcName(self, socket_):
 
         return 'Mr. Valis'
 

@@ -1,6 +1,7 @@
 from PyQt4.QtCore import *
 import socket
 
+## The background thread that serves as a client
 class Client(QThread):
 
     receive_message_signal = pyqtSignal(object)
@@ -14,6 +15,7 @@ class Client(QThread):
         self.gui.send_message_signal.connect(self.send)
 
     def run(self):
+        # Receive and emit messages
         while self.running:
             val = self.socket_.recv(1024)
             if not val: break

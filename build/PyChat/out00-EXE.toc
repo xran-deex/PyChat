@@ -1,9 +1,0 @@
-('H:\\PyChat\\build\\PyChat\\PyChat.exe',
- False,
- False,
- None,
- None,
- [],
- None,
- False,
- 1394711196L)
